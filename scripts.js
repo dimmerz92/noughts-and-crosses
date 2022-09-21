@@ -1,6 +1,8 @@
 const Player = (marker) => {
+    // Atributes
     let wins = 0;
 
+    // Functions
     function getMarker() {
         return marker;
     };
@@ -19,11 +21,15 @@ const Player = (marker) => {
 const gameBoard = (() => {
     // Attributes
     const board = Array(9).fill(null);
-    const tiles = [...document.getElementById("board").children];
     let gameStatus = true;
+
+    // Elements
+    const tiles = [...document.getElementById("board").children];
+    const newButton = document.getElementById("reset");
 
     // Listeners
     tiles.forEach(tile => {tile.addEventListener("click", tile => updateBoard(Number(tile.target.id) - 1))});
+    newButton.addEventListener("click", () => reset())
     
     // Methods
     function render() {
@@ -81,9 +87,14 @@ const gameBoard = (() => {
 })();
 
 const gameController = (() => {
+    // Attributes
     const player1 = Player("X");
     const player2 = Player("O");
     let turn = 0;
+
+    // Elements
+    const player1Score = document.querySelector("#player1 .tally");
+    const player2Score = document.querySelector("#player2 .tally");
 
     function whosTurn() {
         if (turn % 2 == 0) {
@@ -99,15 +110,17 @@ const gameController = (() => {
         // TODO
         if (player1.getMarker() === marker) {
             player1.winGame();
+            player1Score.textContent = player1.getWins();
             gameBoard.stopGame();
         } else if (player2.getMarker() === marker) {
             player2.winGame();
+            player2Score.textContent = player2.getWins();
             gameBoard.stopGame();
         } else {
             console.log(marker);
         };
     };
 
-    return {whosTurn, endGame, player1, player2}
+    return {whosTurn, endGame}
 })();
 
