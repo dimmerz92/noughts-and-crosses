@@ -62,9 +62,11 @@ const gameBoard = (() => {
             let [a,b,c] = [patterns[i][0], patterns[i][1], patterns[i][2]];
             if (board[a] === marker && board[b] === marker && board[c] === marker) {
                 return "win";
-            } else if (board.length === 9 && !board.includes(null)) {
-                return "draw";
             };
+        };
+
+        if (board.length === 9 && !board.includes(null)) {
+            return "draw";
         };
     };
 
@@ -76,7 +78,7 @@ const gameBoard = (() => {
         let marker = gameController.whosTurn();
 
         if (board[tile]) {
-            console.log("something already here");
+            return;
         } else {
             board[tile] = marker;
             render();
@@ -89,7 +91,7 @@ const gameBoard = (() => {
         };
     };
 
-    return {reset, stopGame};
+    return {reset, stopGame, board};
 
 })();
 
@@ -114,7 +116,6 @@ const gameController = (() => {
     };
 
     function endGame(marker = null) {
-        // TODO
         if (player1.getMarker() === marker) {
             incrementScore(player1, player1Card);
             gameBoard.stopGame();
