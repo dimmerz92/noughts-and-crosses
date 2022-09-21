@@ -31,10 +31,13 @@ body {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .finished {
-    background-color: red;
+    background-color: var(--cerise);
+    color: white;
+    transition: 1s;
 }
 
 .game-area {
@@ -92,6 +95,7 @@ body {
     width: 95%;
     height: 95%;
     font-size: 18vh;
+    cursor: pointer;
 }
 
 .square:hover {
@@ -108,6 +112,6 @@ body {
 }
 
 .win {
-    background-color: red;
-    transition: 1s;
+    border: 10px solid var(--cerise);
+    transition: .4s;
 }
