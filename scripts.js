@@ -34,18 +34,25 @@ const gameBoard = (() => {
     // Methods
     function render() {
         for (let i = 0; i < board.length; i++) {
-            tiles[i].textContent = board[i];          
-        }
+            tiles[i].textContent = board[i];
+            if (board[i]) {
+                tiles[i].classList.add(board[i]);
+            };
+        };
     };
 
     function reset() {
         board.fill(null);
         render();
+        gameController.clearStyle();
         gameStatus = true;
+        newButton.classList.remove("finished");
+        tiles.forEach(tile => {tile.classList.remove("X", "O")});
     };
 
     function stopGame() {
         gameStatus = false;
+        newButton.classList.add("finished");
     };
 
     function checkWins(marker) {
@@ -93,8 +100,8 @@ const gameController = (() => {
     let turn = 0;
 
     // Elements
-    const player1Score = document.querySelector("#player1 .tally");
-    const player2Score = document.querySelector("#player2 .tally");
+    const player1Card = document.getElementById("player1");
+    const player2Card = document.getElementById("player2");
 
     function whosTurn() {
         if (turn % 2 == 0) {
@@ -109,18 +116,26 @@ const gameController = (() => {
     function endGame(marker = null) {
         // TODO
         if (player1.getMarker() === marker) {
-            player1.winGame();
-            player1Score.textContent = player1.getWins();
+            incrementScore(player1, player1Card);
             gameBoard.stopGame();
         } else if (player2.getMarker() === marker) {
-            player2.winGame();
-            player2Score.textContent = player2.getWins();
+            incrementScore(player2, player2Card);
             gameBoard.stopGame();
         } else {
-            console.log(marker);
+            gameBoard.stopGame();
         };
     };
 
-    return {whosTurn, endGame}
-})();
+    function incrementScore(player, playerCard) {
+        player.winGame();
+        playerCard.querySelector(".tally").textContent = player.getWins();
+        playerCard.querySelector(".score").classList.add("win");
+    };
 
+    function clearStyle(){
+        player1Card.querySelector(".score").classList.remove("win");
+        player2Card.querySelector(".score").classList.remove("win");
+    };
+
+    return {whosTurn, endGame, clearStyle}
+})();

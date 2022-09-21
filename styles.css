@@ -1,5 +1,11 @@
 :root {
     font-family: arial;
+    --charcoal: rgb(55,63,81);
+    --blue: rgb(0,141,213);
+    --pink: 223,187,177;
+    --mint: 173,208,179;
+    --rose: rgb(245,100,118);
+    --cerise: rgb(228,63,111);
 }
 
 body {
@@ -14,29 +20,54 @@ body {
 }
 
 .toolbar {
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+}
+
+#reset {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+}
+
+.finished {
+    background-color: red;
 }
 
 .game-area {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    background-color: pink;
+    grid-template-columns: 1fr 3fr 1fr;
+    background-color: var(--charcoal);
+    color: white;
 }
 
 .player {
     text-align: center;
-    background-color: aqua;
+}
+
+#player1 .score {
+    background-color: rgb(var(--mint), 0.8);
+}
+
+#player2 .score {
+    background-color: rgb(var(--pink), 0.8);
+}
+
+.score {
+    width: 80%;
+    padding: 1rem 0;
+    margin: 1rem auto auto auto;
+    border-radius: 1rem;
 }
 
 .player img {
     width: 80%;
     height: auto;
-}
-
-.score {
-    background-color: white;
-    width: 80%;
-    margin: 1rem auto auto auto;
+    border-color: transparent;
+    border-radius: 1rem;
 }
 
 #board {
@@ -45,20 +76,38 @@ body {
     grid-template-rows: repeat(3, 1fr);
     height: 70vh;
     width: 70vh;
+    justify-items: center;
     justify-self: center;
+    align-items: center;
     align-self: center;
-    background-color: brown;
+    border-radius: 1rem;
 }
 
 .square {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px black solid;
+    border-radius: 1rem;
     background-color: white;
+    width: 95%;
+    height: 95%;
     font-size: 18vh;
+}
+
+.square:hover {
+    width: 98%;
+    height: 98%;
+}
+
+.X {
+    color: rgb(var(--mint), 0.8);
+}
+
+.O {
+    color: rgb(var(--pink), 0.8);
 }
 
 .win {
     background-color: red;
+    transition: 1s;
 }
