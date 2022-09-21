@@ -60,6 +60,13 @@ body {
         height: 70vh;
         width: 70vh;
     }
+
+    .score {
+        width: 90%;
+        padding: 1rem 0;
+        margin: 1rem auto auto auto;
+        border-radius: 1rem;
+    }
 }
 
 @media (orientation:portrait) {
@@ -116,12 +123,7 @@ body {
     background-color: rgb(var(--pink), 0.8);
 }
 
-.score {
-    width: 90%;
-    padding: 1rem 0;
-    margin: 1rem auto auto auto;
-    border-radius: 1rem;
-}
+
 
 #board {
     display: grid;
